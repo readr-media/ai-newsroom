@@ -1,0 +1,50 @@
+{
+  "id": "wf-from-reactflow",
+  "name": "WF from React Flow",
+  "nodes": [
+    {
+      "id": "http-6243",
+      "name": "HTTP",
+      "type": "http",
+      "config": {
+        "method": "GET",
+        "url": "https://jsonplaceholder.typicode.com/todos/1"
+      }
+    },
+    {
+      "id": "delay-3218",
+      "name": "DELAY",
+      "type": "delay",
+      "config": {
+        "ms": 300
+      }
+    },
+    {
+      "id": "mcp-1729",
+      "name": "MCP",
+      "type": "mcp",
+      "config": {
+        "client": {
+          "command": "node"
+        },
+        "tool": {
+          "name": "echo",
+          "args": {
+            "text": "hello world"
+          }
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "http-6243",
+      "to": "delay-3218"
+    },
+    {
+      "from": "delay-3218",
+      "to": "mcp-1729"
+    }
+  ],
+  "startNodeId": "http-6243"
+}

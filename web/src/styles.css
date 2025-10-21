@@ -1,0 +1,116 @@
+html, body, #root { height: 100%; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; }
+button { cursor: pointer; border: 1px solid #ccc; padding: 6px 12px; border-radius: 4px; background-color: #f0f0f0; }
+input, textarea { padding: 6px; margin-top: 4px; border: 1px solid #ddd; border-radius: 4px; }
+
+.workflow-editor-layout {
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.workflow-header {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f8f8;
+  justify-content: space-between;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-center button {
+  margin: 0 5px;
+  min-width: 80px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.workflow-name {
+  font-size: 1.1em;
+  color: #555;
+}
+
+.server-url-input {
+  width: 180px;
+}
+
+.workflow-content {
+  display: grid;
+  grid-template-columns: 260px 1fr 360px;
+  height: calc(100vh - 60px);
+}
+
+.workflow-sidebar-left,
+.workflow-sidebar-right {
+  padding: 12px;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  background-color: #fbfbfb;
+}
+
+.workflow-sidebar-right {
+  border-left: 1px solid #ddd;
+  border-right: none;
+}
+
+.workflow-canvas {
+  height: 100%;
+}
+
+.toolbox-nodes {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.dnd-node {
+  border: 1px solid #b1b1b7;
+  border-radius: 4px;
+  padding: 10px 15px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.dnd-node:hover {
+  background-color: #f0f0f0;
+}
+
+/* React Flow overrides */
+.react-flow__node {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.react-flow__node-custom .react-flow__handle {
+  background: #555;
+  border-color: #555;
+  width: 8px;
+  height: 8px;
+}
+
+.react-flow__panel {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+

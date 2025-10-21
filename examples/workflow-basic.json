@@ -1,0 +1,15 @@
+{
+  "id": "basic-json",
+  "name": "Basic JSON",
+  "nodes": [
+    { "id": "http", "name": "Get Todo", "type": "http", "config": { "method": "GET", "url": "https://jsonplaceholder.typicode.com/todos/1" } },
+    { "id": "wait", "name": "Delay", "type": "delay", "config": { "ms": 300 } },
+    { "id": "map", "name": "Map", "type": "code", "config": { "code": "return { id: input.data.id, title: input.data.title };" } }
+  ],
+  "edges": [
+    { "from": "http", "to": "wait" },
+    { "from": "wait", "to": "map" }
+  ],
+  "startNodeId": "http"
+}
+

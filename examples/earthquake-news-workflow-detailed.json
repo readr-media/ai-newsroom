@@ -1,0 +1,56 @@
+{
+  "id": "earthquake-news-detailed",
+  "name": "Earthquake News Detailed",
+  "nodes": [
+    {
+      "id": "fetch-earthquake-data",
+      "name": "Fetch Earthquake Data",
+      "type": "http",
+      "config": {
+        "method": "GET",
+        "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+      },
+      "position": {
+        "x": 100,
+        "y": 100
+      }
+    },
+    {
+      "id": "generate-news-text",
+      "name": "Generate News Text",
+      "type": "code",
+      "config": {
+        "code": "const earthquakeData = input;\nconst features = earthquakeData.features;\n\nif (!features || features.length === 0) {\n  return { title: 'No recent earthquakes', content: 'No significant earthquakes reported in the last hour.', timestamp: new Date().toISOString() };\n}\n\nconst latest = features[0];\nconst magnitude = latest.properties.mag;\nconst place = latest.properties.place;\nconst time = new Date(latest.properties.time).toLocaleString();\n\nconst title = `地震快訊：${place} 發生規模 ${magnitude} 地震`;\nconst content = `根據最新報告，在 ${time}，${place} 發生了一起規模 ${magnitude} 的地震。請注意安全。`;\n\nreturn { title, content, timestamp: new Date().toISOString(), rawData: earthquakeData };"
+      },
+      "position": {
+        "x": 100,
+        "y": 250
+      }
+    },
+    {
+      "id": "store-generated-news",
+      "name": "Store Generated News",
+      "type": "gql",
+      "config": {
+        "endpoint": "http://localhost:4000/graphql",
+        "type": "mutation",
+        "gqlString": "mutation CreateStory($title: String!, $content: String!) {\n  createStory(title: $title, content: $content) {\n    id\n    title\n    content\n  }\n}"
+      },
+      "position": {
+        "x": 100,
+        "y": 400
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "fetch-earthquake-data",
+      "to": "generate-news-text"
+    },
+    {
+      "from": "generate-news-text",
+      "to": "store-generated-news"
+    }
+  ],
+  "startNodeId": "fetch-earthquake-data"
+}
